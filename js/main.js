@@ -123,16 +123,18 @@ const getRandomName = () => {
   return randomName;
 }; // генерирует случайное имя комментатора
 
-const getElementNumber = () => {
+const PHOTOS_QUANTITY = 25;
+
+const generatePhotos = () => {
   const result = [];
   const idList = shuffle(idOordinalList);
   const urlList = shuffle(urlOrdinalList);
   const commentIdList = shuffle(commentIdOordinalList);
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < PHOTOS_QUANTITY; i++) {
     result.push(
       {
-        ID: idList[i],
-        URL: urlList[i],
+        id: idList[i],
+        url: urlList[i],
         description: getRandomDescription(),
         likes: getLikesQuantity(),
         comments: {
@@ -147,4 +149,4 @@ const getElementNumber = () => {
   return result;
 };
 
-getElementNumber();
+generatePhotos();
