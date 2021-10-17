@@ -1,13 +1,9 @@
-import {generatePhotos} from './data.js';
-
 const randomPictureTemplate = document.querySelector('#picture').content;
 const picturesList = document.querySelector('.pictures');
 
-const similarPhotos = generatePhotos();
 const similarListFragment = document.createDocumentFragment();
 
-
-const getPhotoTemplate = ({element}) => {
+const getPhotoTemplate = (element) => {
   const photoElement = randomPictureTemplate.cloneNode(true);
   const commentsQty = Object.keys(element.comments).length;
   photoElement.querySelector('.picture__img').src = element.url;
@@ -18,8 +14,8 @@ const getPhotoTemplate = ({element}) => {
   return photoElement;
 };
 
-const renderPhotos = () => {
-  similarPhotos.forEach((photo) => {
+const renderPhotos = (data) => {
+  data.forEach((photo) => {
     similarListFragment.appendChild(getPhotoTemplate(photo));
   });
   picturesList.appendChild(similarListFragment);
