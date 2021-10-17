@@ -94,12 +94,12 @@ const generatePhotos = () => {
         url: urlList[i],
         description: getRandomDescription(),
         likes: getLikesQuantity(),
-        comments: {
+        comments: [{
           id: commentIdList[i],
           avatar: `img/avatar-${getRandomPositiveInteger(1,6)}.svg`,
           message: getRandomMessage(),
           name: getRandomName(),
-        },
+        }],
       },
     );
   }
