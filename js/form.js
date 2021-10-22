@@ -6,6 +6,7 @@ const uploadOverlayCloseElement =  document.querySelector('#upload-cancel');
 const documentBody = document.querySelector('body');
 const hashtagTerms = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const hashtagInput = document.querySelector('.text__hashtags');
+const commentInput = document.querySelector('.text__description');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -63,4 +64,12 @@ hashtagInput.addEventListener('input', () => {
   }
 
   hashtagInput.reportValidity();
+});
+
+hashtagInput.addEventListener('keydown', (evt) => {
+  evt.stopPropagation();
+});
+
+commentInput.addEventListener('keydown', (evt) => {
+  evt.stopPropagation();
 });
