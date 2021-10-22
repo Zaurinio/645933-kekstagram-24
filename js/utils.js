@@ -24,4 +24,7 @@ const generateOrdinalMassive = (name, max) => {
   return name;
 }; // генерирует массив заданной длины
 
-export {getRandomPositiveInteger, shuffle, generateOrdinalMassive};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+const isEnterKey = (evt) => evt.key === 'Enter';
+
+export {getRandomPositiveInteger, shuffle, generateOrdinalMassive, isEscapeKey, isEnterKey};
