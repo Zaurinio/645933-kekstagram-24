@@ -1,75 +1,61 @@
 import {isEscapeKey, isEnterKey} from './utils.js';
 
-const upload = document.querySelector('#upload-file');
-const uploadOverlay = document.querySelector('.img-upload__overlay');
-const uploadOverlayCloseElement =  document.querySelector('#upload-cancel');
+const uploadButton = document.querySelector('#upload-file');
+const editForm = document.querySelector('.img-upload__overlay');
+const editFormCloseButton =  document.querySelector('#upload-cancel');
 const documentBody = document.querySelector('body');
-const hashtagTerms = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const hashtagInput = document.querySelector('.text__hashtags');
-const commentInput = document.querySelector('.text__description');
 
 const onPopupEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    uploadOverlay.classList.add('hidden');
-    documentBody.classList.remove('modal-open');
-    upload.value = '';
-  }
   if (hashtagInput.onfocus) {
     evt.stopPropagation();
   }
+
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    editForm.classList.add('hidden');
+    documentBody.classList.remove('modal-open');
+    uploadButton.value = '';
+  }
 };
 
-function openUserForm () {
-  uploadOverlay.classList.remove('hidden');
+const onCloseButtonKeydown = (evt) => {
+  if(isEnterKey(evt)) {
+    editForm.classList.add('hidden');
+    documentBody.classList.remove('modal-open');
+    uploadButton.value = '';
+  }
+};
+
+const closeUserForm = () => {
+  editForm.classList.add('hidden');
+  documentBody.classList.remove('modal-open');
+  uploadButton.value = '';
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  editFormCloseButton.removeEventListener ('click', closeUserForm);
+  editFormCloseButton.removeEventListener('keydown', onCloseButtonKeydown);
+};
+
+const openUserForm = () => {
+  editForm.classList.remove('hidden');
   documentBody.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
-}
+  editFormCloseButton.addEventListener ('click', closeUserForm);
+  editFormCloseButton.addEventListener('keydown', onCloseButtonKeydown);
+};
 
-function closeUserForm () {
-  uploadOverlay.classList.add('hidden');
-  document.removeEventListener('keydown', onPopupEscKeydown);
-  documentBody.classList.remove('modal-open');
-  upload.value = '';
-}
+uploadButton.addEventListener('change', openUserForm);
 
-upload.addEventListener('change', () => {
-  openUserForm ();
-});
+// uploadButton.addEventListener('change', () => {
+//   openUserForm ();
+// });
 
-uploadOverlayCloseElement.addEventListener ('click', () => {
-  closeUserForm ();
-});
+// editFormCloseButton.addEventListener ('click', () => {
+//   closeUserForm ();
+// });
 
-uploadOverlayCloseElement.addEventListener ('keydown', (evt) => {
-  if(isEnterKey(evt)) {
-    closeUserForm ();
-  }
-});
-
-hashtagInput.addEventListener('input', () => {
-  const inputValue = hashtagInput.value;
-  const inputValueArray = inputValue.split(' ');
-  const isDuplicate = inputValueArray.some((value, id) => inputValueArray.indexOf(value) !== id);
-  const correctHashtag = inputValueArray.some((value) => !hashtagTerms.test(value));
-
-  if (correctHashtag) {
-    hashtagInput.setCustomValidity('Неправильный формат хэштега');
-  } else if (isDuplicate) {
-    hashtagInput.setCustomValidity('Не должно быть повторяющихся хэштегов');
-  } else if (inputValueArray.length > 5) {
-    hashtagInput.setCustomValidity('Нельзя указывать более 5 хэштегов');
-  } else {
-    hashtagInput.setCustomValidity('');
-  }
-
-  hashtagInput.reportValidity();
-});
-
-hashtagInput.addEventListener('keydown', (evt) => {
-  evt.stopPropagation();
-});
-
-commentInput.addEventListener('keydown', (evt) => {
-  evt.stopPropagation();
-});
+// editFormCloseButton.addEventListener ('keydown', (evt) => {
+//   if(isEnterKey(evt)) {
+//     closeUserForm ();
+//   }
+// });
