@@ -46,16 +46,4 @@ const openUserForm = () => {
 
 uploadButton.addEventListener('change', openUserForm);
 
-// uploadButton.addEventListener('change', () => {
-//   openUserForm ();
-// });
-
-// editFormCloseButton.addEventListener ('click', () => {
-//   closeUserForm ();
-// });
-
-// editFormCloseButton.addEventListener ('keydown', (evt) => {
-//   if(isEnterKey(evt)) {
-//     closeUserForm ();
-//   }
-// });
+export {uploadButton, openUserForm};
