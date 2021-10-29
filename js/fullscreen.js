@@ -1,5 +1,6 @@
 import {isEscapeKey, isEnterKey} from './utils.js';
 import {getFullscreenTemplate} from './fullscreen-template.js';
+import {downloadingComments} from './comments-download.js';
 
 const fullscreenPost = document.querySelector('.big-picture');
 const picturesSection = document.querySelector('.pictures');
@@ -7,7 +8,7 @@ const documentBody = document.querySelector('body');
 const fullscreenCloseButton = document.querySelector('.big-picture__cancel');
 
 const commentsCount = document.querySelector('.social__comment-count'); // временный функционал
-const commentsLoadButton = document.querySelector('.comments-loader'); // временный функционал
+const commentLoadButton = document.querySelector('.comments-loader');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -38,18 +39,20 @@ const openUserForm = () => {
   document.addEventListener('keydown', onPopupEscKeydown);
   fullscreenCloseButton.addEventListener ('click', closeUserForm);
   fullscreenCloseButton.addEventListener('keydown', onCloseButtonKeydown);
-
-  commentsCount.classList.add('hidden'); // временный функционал
-  commentsLoadButton.classList.add('hidden'); // временный функционал
+  // commentsCount.classList.add('hidden');
+  // commentsLoadButton.classList.add('hidden');
 };
 
-/// правки
 const findPhoto = (evt, data) => {
   const checkPictureParent = evt.target.closest('.picture');
   if(checkPictureParent) {
     const currentElementId = checkPictureParent.id;
     const currentObject = data.find((el) => el.id === parseInt(currentElementId, 10));
-    getFullscreenTemplate(currentObject, openUserForm);
+    const totalCommentsQty = Object.keys(currentObject.comments).length;
+    getFullscreenTemplate(currentObject, openUserForm, totalCommentsQty);
+
+    // const download = () => downloadingComments(currentObject, totalCommentsQty);
+    // commentsLoadButton.addEventListener('click', download);
   }
 };
 
@@ -59,19 +62,3 @@ const initBigPhotoData = (data) => {
 };
 
 export {initBigPhotoData};
-
-
-// function getChoosenPhoto (array) {
-//   const generatedArray = array;
-//   return function onPhotoClick (evt) {
-//     if(evt.target.closest('.picture')) {
-//       const currentElementId = evt.target.closest('.picture').id;
-//       const currentObject = generatedArray.find((el) => el.id === parseInt(currentElementId, 10));
-//       getFullscreenTemplate(currentObject);
-//     }
-//   };
-// }
-
-// const onPictureClick = (array) => picturesSection.addEventListener('click', getChoosenPhoto(array));
-
-// export {onPictureClick};
