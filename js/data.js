@@ -87,6 +87,20 @@ const generatePhotos = () => {
   const idList = shuffle(idOordinalList);
   const urlList = shuffle(urlOrdinalList);
   const commentIdList = shuffle(commentIdOordinalList);
+  const createCommentsArray = () => {
+    const commentsQty = getRandomPositiveInteger(1,15);
+    const array = [];
+    for (let i = 0; i < commentsQty; i++) {
+      array[i] = {
+        id: commentIdList[i],
+        avatar: `img/avatar-${getRandomPositiveInteger(1,6)}.svg`,
+        message: getRandomMessage(),
+        name: getRandomName(),
+      };
+    }
+    return array;
+  }; // генерирует случайное кол-во комментариев к фото
+
   for (let i = 0; i < PHOTOS_QUANTITY; i++) {
     result.push(
       {
@@ -94,12 +108,7 @@ const generatePhotos = () => {
         url: urlList[i],
         description: getRandomDescription(),
         likes: getLikesQuantity(),
-        comments: [{
-          id: commentIdList[i],
-          avatar: `img/avatar-${getRandomPositiveInteger(1,6)}.svg`,
-          message: getRandomMessage(),
-          name: getRandomName(),
-        }],
+        comments: createCommentsArray(),
       },
     );
   }

@@ -1,8 +1,16 @@
 import {renderPhotos} from './rendering.js';
 import {generatePhotos} from './data.js';
-import {uploadButton, openUserForm} from './form.js';
+import {onUploadButtonChange} from './form.js';
 import {setValidationRules} from './form-validation.js';
+// import {onPictureClick} from './fullscreen.js';
+import {initBigPhotoData} from './fullscreen.js';
 
-renderPhotos(generatePhotos());
+const generatedPhotos = generatePhotos();
+
+
+renderPhotos(generatedPhotos);
 setValidationRules();
-uploadButton.addEventListener('change', openUserForm);
+onUploadButtonChange();
+// onPictureClick(generatedPhotos);
+
+initBigPhotoData(generatedPhotos);

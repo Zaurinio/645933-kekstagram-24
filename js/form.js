@@ -44,6 +44,6 @@ const openUserForm = () => {
   editFormCloseButton.addEventListener('keydown', onCloseButtonKeydown);
 };
 
-uploadButton.addEventListener('change', openUserForm);
+const onUploadButtonChange = () => uploadButton.addEventListener('change', openUserForm);
 
-export {uploadButton, openUserForm};
+export {onUploadButtonChange};
