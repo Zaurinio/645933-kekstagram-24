@@ -13,7 +13,7 @@ const fillCommentTemplate = (object) => {
 export const fillFullscreenTemplate = (element) => {
   fullScreenPost.querySelector('img').src = `photos/${element.url}.jpg`;
   fullScreenPost.querySelector('.likes-count').textContent = element.likes;
-  fullScreenPost.querySelector('.comments-count').textContent = element.comments.length;
+  fullScreenPost.querySelector('.comments-count__total').textContent = element.comments.length;
   fullScreenPost.querySelector('.social__caption').textContent = element.description;
 
   fullScreenPost.querySelector('.social__comments').innerHTML = element.comments.map((comment) => fillCommentTemplate(comment)).join('');
