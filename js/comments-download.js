@@ -3,7 +3,6 @@ const fullScreenPost = document.querySelector('.big-picture');
 const commentLoadButton = document.querySelector('.social__comments-loader');
 let startDownloadingComment = DOWNLOAD_ELSE_QTY;
 let endDownloadingComment = startDownloadingComment + DOWNLOAD_ELSE_QTY;
-fullScreenPost.querySelector('.comments-count__current').textContent = startDownloadingComment;
 
 export const downloadingComments = () => {
   const commentsQty = fullScreenPost.querySelectorAll('.social__comment').length;

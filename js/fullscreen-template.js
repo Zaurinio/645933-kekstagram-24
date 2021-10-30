@@ -14,6 +14,7 @@ export const fillFullscreenTemplate = (element) => {
   fullScreenPost.querySelector('img').src = `photos/${element.url}.jpg`;
   fullScreenPost.querySelector('.likes-count').textContent = element.likes;
   fullScreenPost.querySelector('.comments-count__total').textContent = element.comments.length;
+  fullScreenPost.querySelector('.comments-count__current').textContent = DOWNLOAD_ELSE_QTY;
   fullScreenPost.querySelector('.social__caption').textContent = element.description;
 
   fullScreenPost.querySelector('.social__comments').innerHTML = element.comments.map((comment) => fillCommentTemplate(comment)).join('');
@@ -21,6 +22,7 @@ export const fillFullscreenTemplate = (element) => {
   commentLoadButton.classList.remove('hidden');
   if (element.comments.length <= DOWNLOAD_ELSE_QTY) {
     commentLoadButton.classList.add('hidden');
+    fullScreenPost.querySelector('.comments-count__current').textContent = element.comments.length;
   }
 
   for (let i = DOWNLOAD_ELSE_QTY; i < element.comments.length; i++) {
