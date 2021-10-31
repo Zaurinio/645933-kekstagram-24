@@ -1,25 +1,31 @@
-const fullscreenPost = document.querySelector('.big-picture');
-const fullscreenPostImage = fullscreenPost.querySelector('img');
+const fullScreenPost = document.querySelector('.big-picture');
+const DOWNLOAD_ELSE_QTY = 5;
+const commentLoadButton = document.querySelector('.social__comments-loader');
 
-const fillCommentTemplate = (parent, object) => {
+const fillCommentTemplate = (object) => {
   const template = `<li class="social__comment">
     <img class="social__picture" src=${object.avatar} alt="${object.name}" width="35" height="35">
     <p class="social__text">${object.message}</p>
     </li>`;
-  parent.insertAdjacentHTML('beforeend', template);
+  return template;
 };
 
-const getFullscreenTemplate = (element, callBack) => {
-  callBack();
-  fullscreenPostImage.src = `photos/${element.url}.jpg`;
-  fullscreenPost.querySelector('.likes-count').textContent = element.likes;
-  fullscreenPost.querySelector('.comments-count').textContent = Object.keys(element.comments).length;
+export const fillFullscreenTemplate = (element) => {
+  fullScreenPost.querySelector('img').src = `photos/${element.url}.jpg`;
+  fullScreenPost.querySelector('.likes-count').textContent = element.likes;
+  fullScreenPost.querySelector('.comments-count__total').textContent = element.comments.length;
+  fullScreenPost.querySelector('.comments-count__current').textContent = DOWNLOAD_ELSE_QTY;
+  fullScreenPost.querySelector('.social__caption').textContent = element.description;
 
-  const socialComments = document.querySelector('.social__comments');
-  socialComments.innerHTML = '';
-  element.comments.forEach((comment) => {
-    fillCommentTemplate(socialComments, comment);
-  });
+  fullScreenPost.querySelector('.social__comments').innerHTML = element.comments.map((comment) => fillCommentTemplate(comment)).join('');
+
+  commentLoadButton.classList.remove('hidden');
+  if (element.comments.length <= DOWNLOAD_ELSE_QTY) {
+    commentLoadButton.classList.add('hidden');
+    fullScreenPost.querySelector('.comments-count__current').textContent = element.comments.length;
+  }
+
+  for (let i = DOWNLOAD_ELSE_QTY; i < element.comments.length; i++) {
+    fullScreenPost.querySelectorAll('.social__comment')[i].classList.add('hidden');
+  }
 };
-
-export {getFullscreenTemplate};
