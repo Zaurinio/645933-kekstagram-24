@@ -1,6 +1,6 @@
 import {isEscapeKey, isEnterKey} from './utils.js';
 import {fillFullscreenTemplate} from './fullscreen-template.js';
-import {downloadingComments} from './comments-download.js';
+import {onCommentLoadButtonClick, resetCommentsValue} from './comments-download.js';
 
 const fullscreenPost = document.querySelector('.big-picture');
 const picturesSection = document.querySelector('.pictures');
@@ -11,35 +11,34 @@ const commentLoadButton = document.querySelector('.comments-loader');
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    fullscreenPost.classList.add('hidden');
-    documentBody.classList.remove('modal-open');
+    closeUserForm ();
   }
 };
 
 const onCloseButtonKeydown = (evt) => {
   if(isEnterKey(evt)) {
-    fullscreenPost.classList.add('hidden');
-    documentBody.classList.remove('modal-open');
+    closeUserForm ();
   }
 };
 
-const closeUserForm = () => {
+function closeUserForm () {
   fullscreenPost.classList.add('hidden');
   documentBody.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
   fullscreenCloseButton.removeEventListener ('click', closeUserForm);
   fullscreenCloseButton.removeEventListener('keydown', onCloseButtonKeydown);
-  commentLoadButton.removeEventListener ('click', downloadingComments);
-};
+  commentLoadButton.removeEventListener ('click', onCommentLoadButtonClick);
+  resetCommentsValue();
+}
 
-const openUserForm = () => {
+function openUserForm () {
   fullscreenPost.classList.remove('hidden');
   documentBody.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
   fullscreenCloseButton.addEventListener ('click', closeUserForm);
   fullscreenCloseButton.addEventListener('keydown', onCloseButtonKeydown);
-  commentLoadButton.addEventListener ('click', downloadingComments);
-};
+  commentLoadButton.addEventListener ('click', onCommentLoadButtonClick);
+}
 
 const findPhoto = (evt, data) => {
   const checkPictureParent = evt.target.closest('.picture');
