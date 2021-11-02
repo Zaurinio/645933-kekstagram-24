@@ -2,8 +2,9 @@ import {renderPhotos} from './rendering.js';
 import {generatePhotos} from './data.js';
 import {onUploadButtonChange} from './form.js';
 import {setValidationRules} from './form-validation.js';
-// import {onPictureClick} from './fullscreen.js';
 import {initBigPhotoData} from './fullscreen.js';
+
+import './form-slider.js';
 
 const generatedPhotos = generatePhotos();
 
@@ -11,6 +12,18 @@ const generatedPhotos = generatePhotos();
 renderPhotos(generatedPhotos);
 setValidationRules();
 onUploadButtonChange();
-// onPictureClick(generatedPhotos);
 
 initBigPhotoData(generatedPhotos);
+
+
+// тестирую для задания "10.6. Помощь друга"
+
+// Фильтр
+import {getFilterName} from './effects.js';
+const effectsList = document.querySelector('.effects__list');
+effectsList.addEventListener('click', getFilterName);
+
+// Масштаб
+import {changeScaleValue} from './scale.js';
+const scaleSection = document.querySelector('.scale');
+scaleSection.addEventListener('click', changeScaleValue);

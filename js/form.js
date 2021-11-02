@@ -1,4 +1,5 @@
 import {isEscapeKey, isEnterKey} from './utils.js';
+import {resetFilterSettings} from './effects.js';
 
 const uploadButton = document.querySelector('#upload-file');
 const editForm = document.querySelector('.img-upload__overlay');
@@ -13,36 +14,35 @@ const onPopupEscKeydown = (evt) => {
 
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    editForm.classList.add('hidden');
-    documentBody.classList.remove('modal-open');
     uploadButton.value = '';
+    closeUserForm ();
   }
 };
 
 const onCloseButtonKeydown = (evt) => {
   if(isEnterKey(evt)) {
-    editForm.classList.add('hidden');
-    documentBody.classList.remove('modal-open');
     uploadButton.value = '';
+    closeUserForm ();
   }
 };
 
-const closeUserForm = () => {
+function closeUserForm () {
   editForm.classList.add('hidden');
   documentBody.classList.remove('modal-open');
   uploadButton.value = '';
   document.removeEventListener('keydown', onPopupEscKeydown);
   editFormCloseButton.removeEventListener ('click', closeUserForm);
   editFormCloseButton.removeEventListener('keydown', onCloseButtonKeydown);
-};
+}
 
-const openUserForm = () => {
+function openUserForm () {
   editForm.classList.remove('hidden');
   documentBody.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
   editFormCloseButton.addEventListener ('click', closeUserForm);
   editFormCloseButton.addEventListener('keydown', onCloseButtonKeydown);
-};
+  resetFilterSettings();
+}
 
 const onUploadButtonChange = () => uploadButton.addEventListener('change', openUserForm);
 
