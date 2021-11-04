@@ -2,21 +2,46 @@ const editableImageBlock= document.querySelector('.img-upload__preview');
 const editableImage = editableImageBlock.querySelector('img');
 const sliderElement= document.querySelector('.effect-level__slider');
 const effectLevel = document.querySelector('.effect-level__value');
+const filterSlider = document.querySelector('.effect-level');
 
-noUiSlider.create(sliderElement, {
-  range: {
-    min: 0,
-    max: 1,
-  },
-  start: 1,
-  connect: 'lower',
-  step: 0.1,
-});
 
+const createFormSlider = () => {
+  noUiSlider.create(sliderElement, {
+    range: {
+      min: 0,
+      max: 1,
+    },
+    start: 1,
+    connect: 'lower',
+    step: 0.1,
+    format: {
+      to: function (value) {
+        if (Number.isInteger(value)) {
+          return value.toFixed(0);
+        }
+        return value.toFixed(1);
+      },
+      from: function (value) {
+        return parseFloat(value);
+      },
+    },
+  });
+  filterSlider.classList.add('hidden');
+};
 
 const setSliderSettings = (currentFilter) => {
 
   const filterSettings = {
+    none: {
+      effect: 'none',
+      range: {
+        min: 0,
+        max: 1,
+      },
+      start: 1,
+      step: 0.1,
+      unit: '',
+    },
     chrome: {
       effect: 'grayscale',
       range: {
@@ -78,12 +103,21 @@ const setSliderSettings = (currentFilter) => {
     start: filterSettings[currentFilter]['start'],
   });
 
-  sliderElement.noUiSlider.on('update', (_, handle, unencoded) => {
-    effectLevel.value = unencoded[handle];
+  sliderElement.noUiSlider.on('update', (values, handle) => {
+    effectLevel.value = values[handle];
+    effectLevel.setAttribute('value', effectLevel.value);
 
-    editableImage.style.filter = `${filterSettings[currentFilter]['effect']}(${effectLevel.value}${filterSettings[currentFilter]['unit']})`;
-
+    if (currentFilter === 'none') {
+      editableImage.style.filter = 'none';
+    } else {
+      editableImage.style.filter = `${filterSettings[currentFilter]['effect']}(${effectLevel.value}${filterSettings[currentFilter]['unit']})`;
+    }
   });
 };
 
-export {setSliderSettings};
+const resetSliderSettings = () => {
+  sliderElement.noUiSlider.destroy();
+  editableImage.style.filter = 'none';
+};
+
+export {createFormSlider, setSliderSettings, resetSliderSettings};

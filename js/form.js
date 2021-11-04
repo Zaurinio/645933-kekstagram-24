@@ -1,5 +1,7 @@
 import {isEscapeKey, isEnterKey} from './utils.js';
 import {resetFilterSettings} from './effects.js';
+import {createFormSlider, resetSliderSettings} from './form-slider.js';
+import {resetScaleValue} from './scale.js';
 
 const uploadButton = document.querySelector('#upload-file');
 const editForm = document.querySelector('.img-upload__overlay');
@@ -33,6 +35,9 @@ function closeUserForm () {
   document.removeEventListener('keydown', onPopupEscKeydown);
   editFormCloseButton.removeEventListener ('click', closeUserForm);
   editFormCloseButton.removeEventListener('keydown', onCloseButtonKeydown);
+  resetFilterSettings();
+  resetSliderSettings();
+  resetScaleValue();
 }
 
 function openUserForm () {
@@ -41,7 +46,7 @@ function openUserForm () {
   document.addEventListener('keydown', onPopupEscKeydown);
   editFormCloseButton.addEventListener ('click', closeUserForm);
   editFormCloseButton.addEventListener('keydown', onCloseButtonKeydown);
-  resetFilterSettings();
+  createFormSlider();
 }
 
 const onUploadButtonChange = () => uploadButton.addEventListener('change', openUserForm);
