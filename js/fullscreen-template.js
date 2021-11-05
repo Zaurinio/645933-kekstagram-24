@@ -11,7 +11,7 @@ const fillCommentTemplate = (object) => {
 };
 
 export const fillFullscreenTemplate = (element) => {
-  fullScreenPost.querySelector('img').src = `photos/${element.url}.jpg`;
+  fullScreenPost.querySelector('img').src = element.url;
   fullScreenPost.querySelector('.likes-count').textContent = element.likes;
   fullScreenPost.querySelector('.comments-count__total').textContent = element.comments.length;
   fullScreenPost.querySelector('.comments-count__current').textContent = DOWNLOAD_ELSE_QTY;

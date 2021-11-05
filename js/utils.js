@@ -27,4 +27,5 @@ const generateOrdinalMassive = (name, max) => {
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const isEnterKey = (evt) => evt.key === 'Enter';
 
+
 export {getRandomPositiveInteger, shuffle, generateOrdinalMassive, isEscapeKey, isEnterKey};
