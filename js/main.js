@@ -2,8 +2,10 @@ import {renderPhotos} from './rendering.js';
 import {generatePhotos} from './data.js';
 import {onUploadButtonChange} from './form.js';
 import {setValidationRules} from './form-validation.js';
-// import {onPictureClick} from './fullscreen.js';
 import {initBigPhotoData} from './fullscreen.js';
+import {onFilterClick} from './effects.js';
+import {onScaleButtonClick} from './scale.js';
+import './form-slider.js';
 
 const generatedPhotos = generatePhotos();
 
@@ -11,6 +13,6 @@ const generatedPhotos = generatePhotos();
 renderPhotos(generatedPhotos);
 setValidationRules();
 onUploadButtonChange();
-// onPictureClick(generatedPhotos);
-
 initBigPhotoData(generatedPhotos);
+onFilterClick();
+onScaleButtonClick();
