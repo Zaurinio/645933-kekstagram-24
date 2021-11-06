@@ -30,4 +30,9 @@ const setValidationRules = () => {
   });
 };
 
-export {setValidationRules};
+const resetFormText = () => {
+  hashtagInput.value = '';
+  commentInput.value = '';
+};
+
+export {setValidationRules, resetFormText};
