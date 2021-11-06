@@ -16,9 +16,15 @@ onUploadButtonChange();
 onFilterClick();
 onScaleButtonClick();
 
-getData(
-  (photos) => (renderPhotos(photos), initBigPhotoData(photos)),
-  () => showAlert('Ошибка получения данных. Перезагрузите страницу'),
+const iniPage = (photos) => (
+  renderPhotos(photos),
+  initBigPhotoData(photos)
 );
+
+const onError = () => {
+  showAlert('Ошибка получения данных. Перезагрузите страницу');
+};
+
+getData(iniPage, onError);
 
 setUserFormSubmit(showFormSuccessMsg, closeUserForm);

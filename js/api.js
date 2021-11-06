@@ -1,5 +1,10 @@
+
+const GET_DATA_SERVER_ADDRESS = 'https://24.javascript.pages.academy/kekstagram/data';
+
+const SEND_DATA_SERVER_ADDRESS = 'https://24.javascript.pages.academy/kekstagram';
+
 const getData = (onSuccess, onFail) => {
-  fetch('https://24.javascript.pages.academy/kekstagram/data')
+  fetch(GET_DATA_SERVER_ADDRESS)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -17,7 +22,7 @@ const getData = (onSuccess, onFail) => {
 
 const sendData = (formClose, onSuccess, onFail, body) => {
   fetch(
-    'https://24.javascript.pages.academy/kekstagram',
+    SEND_DATA_SERVER_ADDRESS,
     {
       method: 'POST',
       body,
