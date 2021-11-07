@@ -27,5 +27,12 @@ const generateOrdinalMassive = (name, max) => {
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const isEnterKey = (evt) => evt.key === 'Enter';
 
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
 
-export {getRandomPositiveInteger, shuffle, generateOrdinalMassive, isEscapeKey, isEnterKey};
+export {getRandomPositiveInteger, shuffle, generateOrdinalMassive, isEscapeKey, isEnterKey, debounce};

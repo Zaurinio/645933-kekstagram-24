@@ -1,6 +1,6 @@
 const randomPictureTemplate = document.querySelector('#picture').content;
 const picturesList = document.querySelector('.pictures');
-
+const photosFilter = document.querySelector('.img-filters');
 const similarListFragment = document.createDocumentFragment();
 
 const getPhotoTemplate = (element) => {
@@ -19,6 +19,7 @@ const renderPhotos = (data) => {
     similarListFragment.appendChild(getPhotoTemplate(photo));
   });
   picturesList.appendChild(similarListFragment);
+  photosFilter.classList.remove('img-filters--inactive');
 };
 
 

@@ -5,7 +5,6 @@ import {closeUserForm} from './form.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 
-// отправка формы
 const setUserFormSubmit = () => {
   imgUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
