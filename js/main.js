@@ -1,37 +1,31 @@
 import {renderPhotos} from './rendering.js';
-import {onUploadButtonChange} from './form.js';
-import {closeUserForm} from './form.js';
+import {bindUploadButtonListener} from './form.js';
 import {setUserFormSubmit} from './form-submit.js';
 import {initBigPhotoData} from './fullscreen.js';
-import {onFilterClick} from './effects.js';
-import {onScaleButtonClick} from './scale.js';
+import {bindEffectsButtonsListener} from './effects.js';
+import {bindScaleButtonListener} from './scale.js';
 import './form-slider.js';
-import {showFormSuccessMsg} from './form-messages.js';
 import {getData} from './api.js';
 import {showAlert} from './form-messages.js';
-import {filterRandomPhotos} from './download-filter.js';
-import {filterPhotosByComments} from './download-filter.js';
-import {filterDefaultPhotos} from './download-filter.js';
-import {changeDownloadFilter} from './download-filter.js';
+import {bindFilterButtonListener} from './download-filter.js';
+import {bindFileChooserListener} from './form-photo-upload.js';
 
-onUploadButtonChange();
-onFilterClick();
-onScaleButtonClick();
-changeDownloadFilter();
+bindUploadButtonListener();
+bindEffectsButtonsListener();
+bindScaleButtonListener();
+bindFileChooserListener();
 
 const iniPage = (photos) => (
   renderPhotos(photos),
   initBigPhotoData(photos),
-  filterRandomPhotos(photos),
-  filterPhotosByComments(photos),
-  filterDefaultPhotos(photos)
+  bindFilterButtonListener(photos)
 );
 
-const onError = () => {
+const onGetDataError = () => {
   showAlert('Ошибка получения данных. Перезагрузите страницу');
 };
 
-getData(iniPage, onError);
+getData(iniPage, onGetDataError);
 
-setUserFormSubmit(showFormSuccessMsg, closeUserForm);
+setUserFormSubmit();
 

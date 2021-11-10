@@ -1,10 +1,10 @@
 import {isEscapeKey, isEnterKey} from './utils.js';
-import {resetFilterSettings} from './effects.js';
+import {resetEffectSettings} from './effects.js';
 import {createFormSlider, resetSliderSettings} from './form-slider.js';
 import {resetScaleValue} from './scale.js';
 import {resetFormText} from './form-validation.js';
-import {validationRules} from './form-validation.js';
-import {invalidInputHighlighting} from './form-validation.js';
+import {onInputChange} from './form-validation.js';
+import {onSubmitButtonClick} from './form-validation.js';
 
 const uploadButton = document.querySelector('#upload-file');
 const editForm = document.querySelector('.img-upload__overlay');
@@ -18,51 +18,51 @@ const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     uploadButton.value = '';
-    closeUserForm ();
+    onCloseButtonClick ();
   }
 };
 
 const onCloseButtonKeydown = (evt) => {
   if(isEnterKey(evt)) {
     uploadButton.value = '';
-    closeUserForm ();
+    onCloseButtonClick ();
   }
 };
 
-const checkInputFocus = (evt) => {
+const onInputEscKeydown = (evt) => {
   evt.stopPropagation();
 };
 
-function closeUserForm () {
+function onCloseButtonClick () {
   editForm.classList.add('hidden');
   documentBody.classList.remove('modal-open');
   uploadButton.value = '';
   document.removeEventListener('keydown', onPopupEscKeydown);
-  editFormCloseButton.removeEventListener ('click', closeUserForm);
+  editFormCloseButton.removeEventListener ('click', onCloseButtonClick);
   editFormCloseButton.removeEventListener('keydown', onCloseButtonKeydown);
-  hashtagInput.removeEventListener('input', validationRules);
-  hashtagInput.removeEventListener('keydown', checkInputFocus);
-  commentInput.removeEventListener('keydown', checkInputFocus);
-  formSubmitButton.removeEventListener ('click', invalidInputHighlighting);
-  resetFilterSettings();
+  hashtagInput.removeEventListener('input', onInputChange);
+  hashtagInput.removeEventListener('keydown', onInputEscKeydown);
+  commentInput.removeEventListener('keydown', onInputEscKeydown);
+  formSubmitButton.removeEventListener ('click', onSubmitButtonClick);
+  resetEffectSettings();
   resetSliderSettings();
   resetScaleValue();
   resetFormText();
 }
 
-function openUserForm () {
+function onUploadButtonChange () {
   editForm.classList.remove('hidden');
   documentBody.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
-  editFormCloseButton.addEventListener ('click', closeUserForm);
+  editFormCloseButton.addEventListener ('click', onCloseButtonClick);
   editFormCloseButton.addEventListener('keydown', onCloseButtonKeydown);
-  hashtagInput.addEventListener('input', validationRules);
-  hashtagInput.addEventListener('keydown', checkInputFocus);
-  commentInput.addEventListener('keydown', checkInputFocus);
-  formSubmitButton.addEventListener ('click', invalidInputHighlighting);
+  hashtagInput.addEventListener('input', onInputChange);
+  hashtagInput.addEventListener('keydown', onInputEscKeydown);
+  commentInput.addEventListener('keydown', onInputEscKeydown);
+  formSubmitButton.addEventListener ('click', onSubmitButtonClick);
   createFormSlider();
 }
 
-const onUploadButtonChange = () => uploadButton.addEventListener('change', openUserForm);
+const bindUploadButtonListener = () => uploadButton.addEventListener('change', onUploadButtonChange);
 
-export {onUploadButtonChange, closeUserForm};
+export {bindUploadButtonListener, onCloseButtonClick};

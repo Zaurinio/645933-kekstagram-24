@@ -2,7 +2,7 @@ const hashtagTerms = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const hashtagInput = document.querySelector('.text__hashtags');
 const commentInput = document.querySelector('.text__description');
 
-const validationRules = () => {
+const onInputChange = () => {
   const inputValueArray = hashtagInput.value.toLowerCase().split(' ');
   const isDuplicate = inputValueArray.some((value, id) => inputValueArray.indexOf(value) !== id);
   const correctHashtag = inputValueArray.some((value) => !hashtagTerms.test(value));
@@ -21,7 +21,7 @@ const validationRules = () => {
   hashtagInput.reportValidity();
 };
 
-const invalidInputHighlighting = () => {
+const onSubmitButtonClick = () => {
   const setHighlighting = () => {
     hashtagInput.style.outline = '2px solid red';
   };
@@ -35,4 +35,4 @@ const resetFormText = () => {
   commentInput.value = '';
 };
 
-export {resetFormText, validationRules, invalidInputHighlighting};
+export {resetFormText, onInputChange, onSubmitButtonClick};

@@ -4,7 +4,7 @@ const editableImage = document.querySelector('.img-upload__preview');
 const effectsList = document.querySelector('.effects__list');
 const filterSlider = document.querySelector('.effect-level');
 
-const getFilterName = (evt) => {
+const onEffectClick = (evt) => {
   const clickedFilter = evt.target.matches('.effects__radio');
   const imageClassList = editableImage.className.split(' ');
   const filterClassForChange = imageClassList.find((el) => el.includes('effects__preview--'));
@@ -23,7 +23,7 @@ const getFilterName = (evt) => {
   }
 };
 
-const resetFilterSettings = () => {
+const resetEffectSettings = () => {
   const imageClassList = document.querySelector('.img-upload__preview').className.split(' ');
   const filterClassForChange = imageClassList.find((el) => el.includes('effects__preview--'));
   if (filterClassForChange !== 'effects__preview--none') {
@@ -32,6 +32,6 @@ const resetFilterSettings = () => {
   }
 };
 
-const onFilterClick = () => effectsList.addEventListener('click', getFilterName);
+const bindEffectsButtonsListener = () => effectsList.addEventListener('click', onEffectClick);
 
-export {onFilterClick, resetFilterSettings};
+export {bindEffectsButtonsListener, resetEffectSettings};

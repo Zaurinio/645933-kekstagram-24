@@ -35,8 +35,6 @@ const onCommentLoadButtonClick = () => {
 
   if (currentRemaininQty <= 0) {
     commentLoadButton.classList.add('hidden');
-    // startDownloadingComment = DOWNLOAD_ELSE_QTY;
-    // endDownloadingComment = startDownloadingComment + DOWNLOAD_ELSE_QTY;
     resetCommentsValue();
   }
 };
