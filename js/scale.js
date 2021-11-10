@@ -2,7 +2,7 @@ const scaleSection = document.querySelector('.scale');
 const scaleLevel = scaleSection.querySelector('.scale__control--value');
 const imagePreview = document.querySelector('.img-upload__preview');
 
-const changeScaleValue = (evt) => {
+const onScaleButtonClick = (evt) => {
   const scaleDownButton = evt.target.matches('.scale__control--smaller');
   const scaleUpButton = evt.target.matches('.scale__control--bigger');
   let scaleLevelWithoutPercent = Number(scaleLevel.value.split('%').join(''));
@@ -21,6 +21,6 @@ const changeScaleValue = (evt) => {
 
 const resetScaleValue = () => imagePreview.style.transform = 'scale(1)';
 
-const onScaleButtonClick = () => scaleSection.addEventListener('click', changeScaleValue);
+const bindScaleButtonListener = () => scaleSection.addEventListener('click', onScaleButtonClick);
 
-export {onScaleButtonClick, resetScaleValue};
+export {bindScaleButtonListener, resetScaleValue};

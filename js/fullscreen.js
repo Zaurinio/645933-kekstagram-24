@@ -11,31 +11,31 @@ const commentLoadButton = document.querySelector('.comments-loader');
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeUserForm ();
+    onCloseButtonClick ();
   }
 };
 
 const onCloseButtonKeydown = (evt) => {
   if(isEnterKey(evt)) {
-    closeUserForm ();
+    onCloseButtonClick ();
   }
 };
 
-function closeUserForm () {
+function onCloseButtonClick () {
   fullscreenPost.classList.add('hidden');
   documentBody.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
-  fullscreenCloseButton.removeEventListener ('click', closeUserForm);
+  fullscreenCloseButton.removeEventListener ('click', onCloseButtonClick);
   fullscreenCloseButton.removeEventListener('keydown', onCloseButtonKeydown);
   commentLoadButton.removeEventListener ('click', onCommentLoadButtonClick);
   resetCommentsValue();
 }
 
-function openUserForm () {
+function openFullscreenPhoto () {
   fullscreenPost.classList.remove('hidden');
   documentBody.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
-  fullscreenCloseButton.addEventListener ('click', closeUserForm);
+  fullscreenCloseButton.addEventListener ('click', onCloseButtonClick);
   fullscreenCloseButton.addEventListener('keydown', onCloseButtonKeydown);
   commentLoadButton.addEventListener ('click', onCommentLoadButtonClick);
 }
@@ -46,7 +46,7 @@ const findPhoto = (evt, data) => {
     const currentElementId = checkPictureParent.id;
     const currentObject = data.find((el) => el.id === parseInt(currentElementId, 10));
     fillFullscreenTemplate(currentObject);
-    openUserForm();
+    openFullscreenPhoto();
   }
 };
 

@@ -20,7 +20,7 @@ const getData = (onSuccess, onFail) => {
     });
 };
 
-const sendData = (formClose, onSuccess, onFail, body) => {
+const sendData = (onSuccess, onFail, body) => {
   fetch(
     SEND_DATA_SERVER_ADDRESS,
     {
@@ -29,7 +29,6 @@ const sendData = (formClose, onSuccess, onFail, body) => {
     },
   )
     .then((response) => {
-      formClose();
       if (response.ok) {
         onSuccess();
       } else {

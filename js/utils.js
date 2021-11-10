@@ -3,7 +3,7 @@ function getRandomPositiveInteger (a, b) {
   const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
-} // генерация случайного числа в заданном диапазоне
+}
 
 const shuffle = (array) => {
   const newArray = array.slice();
@@ -14,7 +14,7 @@ const shuffle = (array) => {
     newArray[j] = swap;
   }
   return newArray;
-}; // перемешивание массив в случайном порядке
+};
 
 
 const generateOrdinalMassive = (name, max) => {
@@ -22,10 +22,17 @@ const generateOrdinalMassive = (name, max) => {
     name.push(i);
   }
   return name;
-}; // генерирует массив заданной длины
+};
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const isEnterKey = (evt) => evt.key === 'Enter';
 
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
 
-export {getRandomPositiveInteger, shuffle, generateOrdinalMassive, isEscapeKey, isEnterKey};
+export {getRandomPositiveInteger, shuffle, generateOrdinalMassive, isEscapeKey, isEnterKey, debounce};

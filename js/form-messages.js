@@ -6,17 +6,17 @@ const formErrorMsgTemplate = document.querySelector('#error').content;
 const onMessageEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeMessage ();
+    onCloseButtonClick ();
   }
 };
 
 const onModalWindowClick = (evt) => {
   if (evt.target.matches('.success') || evt.target.matches('.error')) {
-    closeMessage ();
+    onCloseButtonClick ();
   }
 };
 
-function closeMessage () {
+function onCloseButtonClick () {
   document.removeEventListener('keydown', onMessageEscKeydown);
   document.removeEventListener('click', onModalWindowClick);
   if (document.querySelector('.success')) {
@@ -31,7 +31,7 @@ const showFormSuccessMsg = () => {
   document.querySelector('body').appendChild(formSuccessMsg);
 
   const successMessageCloseButton = document.querySelector('.success__button');
-  successMessageCloseButton.addEventListener('click', closeMessage);
+  successMessageCloseButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onMessageEscKeydown);
   document.addEventListener('click', onModalWindowClick);
 };
@@ -41,7 +41,7 @@ const showFormErrorMsg = () => {
   document.querySelector('body').appendChild(formErrorMsg);
 
   const errorMessageCloseButton = document.querySelector('.error__button');
-  errorMessageCloseButton.addEventListener('click', closeMessage);
+  errorMessageCloseButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onMessageEscKeydown);
   document.addEventListener('click', onModalWindowClick);
 };

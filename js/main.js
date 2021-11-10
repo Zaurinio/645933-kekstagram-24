@@ -1,30 +1,31 @@
 import {renderPhotos} from './rendering.js';
-import {onUploadButtonChange} from './form.js';
-import {closeUserForm} from './form.js';
+import {bindUploadButtonListener} from './form.js';
 import {setUserFormSubmit} from './form-submit.js';
-import {setValidationRules} from './form-validation.js';
 import {initBigPhotoData} from './fullscreen.js';
-import {onFilterClick} from './effects.js';
-import {onScaleButtonClick} from './scale.js';
+import {bindEffectsButtonsListener} from './effects.js';
+import {bindScaleButtonListener} from './scale.js';
 import './form-slider.js';
-import {showFormSuccessMsg} from './form-messages.js';
 import {getData} from './api.js';
 import {showAlert} from './form-messages.js';
+import {bindFilterButtonListener} from './download-filter.js';
+import {bindFileChooserListener} from './form-photo-upload.js';
 
-setValidationRules();
-onUploadButtonChange();
-onFilterClick();
-onScaleButtonClick();
+bindUploadButtonListener();
+bindEffectsButtonsListener();
+bindScaleButtonListener();
+bindFileChooserListener();
 
 const iniPage = (photos) => (
   renderPhotos(photos),
-  initBigPhotoData(photos)
+  initBigPhotoData(photos),
+  bindFilterButtonListener(photos)
 );
 
-const onError = () => {
+const onGetDataError = () => {
   showAlert('Ошибка получения данных. Перезагрузите страницу');
 };
 
-getData(iniPage, onError);
+getData(iniPage, onGetDataError);
 
-setUserFormSubmit(showFormSuccessMsg, closeUserForm);
+setUserFormSubmit();
+
