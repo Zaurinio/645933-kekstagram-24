@@ -31,14 +31,14 @@ function onCloseButtonClick () {
   resetCommentsValue();
 }
 
-function openFullscreenPhoto () {
+const openFullscreenPhoto = () => {
   fullscreenPost.classList.remove('hidden');
   documentBody.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
   fullscreenCloseButton.addEventListener ('click', onCloseButtonClick);
   fullscreenCloseButton.addEventListener('keydown', onCloseButtonKeydown);
   commentLoadButton.addEventListener ('click', onCommentLoadButtonClick);
-}
+};
 
 const findPhoto = (evt, data) => {
   const checkPictureParent = evt.target.closest('.picture');

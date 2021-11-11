@@ -19,7 +19,10 @@ const onScaleButtonClick = (evt) => {
   imagePreview.style.transform = `scale(${scaleLevelWithoutPercent/100}`;
 };
 
-const resetScaleValue = () => imagePreview.style.transform = 'scale(1)';
+const resetScaleValue = () => {
+  imagePreview.style.transform = 'scale(1)';
+  scaleLevel.value = '100%';
+};
 
 const bindScaleButtonListener = () => scaleSection.addEventListener('click', onScaleButtonClick);
 

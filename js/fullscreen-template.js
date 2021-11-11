@@ -1,5 +1,6 @@
-const fullScreenPost = document.querySelector('.big-picture');
 const DOWNLOAD_ELSE_QTY = 5;
+
+const fullScreenPost = document.querySelector('.big-picture');
 const commentLoadButton = document.querySelector('.social__comments-loader');
 
 const fillCommentTemplate = (object) => {

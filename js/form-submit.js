@@ -14,9 +14,14 @@ const setUserFormSubmit = () => {
       showFormSuccessMsg();
     };
 
+    const onErrorFormData = () => {
+      onCloseButtonClick();
+      showFormErrorMsg();
+    };
+
     sendData(
       () => onSendFormData(),
-      () => showFormErrorMsg(),
+      () => onErrorFormData(),
       new FormData(imgUploadForm),
     );
 

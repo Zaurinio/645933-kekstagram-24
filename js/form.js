@@ -50,7 +50,7 @@ function onCloseButtonClick () {
   resetFormText();
 }
 
-function onUploadButtonChange () {
+const onUploadButtonChange = () => {
   editForm.classList.remove('hidden');
   documentBody.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
@@ -61,7 +61,7 @@ function onUploadButtonChange () {
   commentInput.addEventListener('keydown', onInputEscKeydown);
   formSubmitButton.addEventListener ('click', onSubmitButtonClick);
   createFormSlider();
-}
+};
 
 const bindUploadButtonListener = () => uploadButton.addEventListener('change', onUploadButtonChange);
 
